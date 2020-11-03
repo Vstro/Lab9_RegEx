@@ -91,7 +91,7 @@ namespace Lab9_RegEx
             Value = Regex.Replace(
                 Value,
                 @"\b([01]\d|2[0-3])(:[0-5]\d){2}\b",
-                (match) => 
+                (match) =>
                 {
                     int hour = int.Parse(match.Value.Substring(0, 2));
                     int min = int.Parse(match.Value.Substring(3, 2));
@@ -100,7 +100,7 @@ namespace Lab9_RegEx
                     {
                         hour = (hour + (min + 1) / 60) % 24;
                         min = (min + 1) % 60;
-                    } 
+                    }
                     return string.Format("{0:00}:{1:00}", hour, min);
                 });
         }

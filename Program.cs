@@ -24,6 +24,7 @@ namespace Lab9_RegEx
                     "8) Вывести все даты, которые относятся к текущему году.\n" +
                     "9) Вывести все адреса web-сайтов, содержащиеся в сообщении.\n" +
                     "0) Преобразовать время в формате чч:мм:сс к формату чч:мм.\n" +
+                    "C) Сгенерировать конкорданс текста.\n" +
                     "E) Выход.\n");
                 Console.Write("//> ");
                 choice = Console.ReadLine().First();
@@ -39,7 +40,8 @@ namespace Lab9_RegEx
                             if (message.Contains(buffer))
                             {
                                 Console.WriteLine("Да, оно есть в сообщении.");
-                            } else
+                            }
+                            else
                             {
                                 Console.WriteLine("Нет, его нет в сообщении.");
                             }
@@ -158,6 +160,21 @@ namespace Lab9_RegEx
                             message.Value = Console.ReadLine();
                             message.RoundSecInTime();
                             Console.WriteLine("Результирующее сообщение: " + message.Value);
+                            break;
+                        }
+                    case 'C':
+                        {
+                            int linesInPage;
+                            Concordance concordanceProcessor = new Concordance();
+                            Console.Write("Введите имя файла с исходным текстом: ");
+                            buffer = Console.ReadLine();
+                            concordanceProcessor.TextFileName = buffer;
+                            Console.Write("Введите кол-во строк в одной странице: ");
+                            while (!int.TryParse(Console.ReadLine(), out linesInPage)) ;
+                            concordanceProcessor.LinesInPage = linesInPage;
+                            Console.Write("Введите имя нового файла с конкордансом текста: ");
+                            buffer = Console.ReadLine();
+                            concordanceProcessor.WriteConcordance(buffer);
                             break;
                         }
                     default:
